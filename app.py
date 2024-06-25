@@ -1,8 +1,12 @@
 import os
 from flask import Flask, jsonify, send_from_directory, render_template, request
 import pandas as pd
+import joblib
 
 app = Flask(__name__)
+
+# Cargar el modelo entrenado
+model = joblib.load('model.pkl')
 
 @app.route('/')
 def index():
@@ -16,12 +20,12 @@ def static_files(path):
 def predict():
     try:
         form_data = request.form.to_dict()
-        # Convert form data to DataFrame
+        # Convertir datos del formulario a DataFrame
         input_data = pd.DataFrame([form_data])
-        # Convert all values to numeric
+        # Convertir todos los valores a numéricos
         input_data = input_data.apply(pd.to_numeric)
 
-        # Assuming 'model' is loaded and 'nueva_prediccion' function exists
+        # Predecir usando el modelo cargado
         prediction = model.predict(input_data)
         return jsonify({'prediction': prediction[0]})
     except Exception as e:
