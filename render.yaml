@@ -1,0 +1,10 @@
+services:
+  - type: web
+    name: flask-dashboard
+    env: python
+    region: oregon
+    plan: free
+    buildCommand: pip install -r requirements.txt
+    startCommand: python app.py
+    envVars:
+      DEBUG: 'True'  # Habilitar el modo de depuración
