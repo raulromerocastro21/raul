@@ -1,134 +1,191 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Predicción de Ingeniería Social</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f9;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Predicción de Ingeniería Social</title>
+  <style>
+    /* General Styles */
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f9;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
 
-        .container {
-            background: #fff;
-            padding: 20px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            border-radius: 8px;
-            width: 90%;
-            max-width: 600px;
-            text-align: center;
-        }
+    .container {
+      background: #fff;
+      padding: 20px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      border-radius: 8px;
+      width: 90%;
+      max-width: 600px;
+      text-align: center;
+      margin: 20px;
+    }
 
-        h1 {
-            color: #333;
-            margin-bottom: 20px;
-        }
+    /* Header Styles */
+    header {
+      background-color: #4CAF50; /* Green background */
+      color: #fff;
+      padding: 15px 0;
+      border-radius: 8px 8px 0 0; /* Rounded top corners */
+      width: 100%;
+    }
 
-        form {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-        }
+    header h2 {
+      margin: 0;
+      font-size: 24px;
+      text-align: center;
+    }
 
-        label {
-            text-align: left;
-            font-size: 14px;
-            color: #555;
-        }
+    /* Form Styles */
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
 
-        input[type="number"] {
-            padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            width: calc(100% - 22px);
-            font-size: 14px;
-        }
+    label {
+      text-align: left;
+      font-size: 14px;
+      color: #555;
+      display: block;
+    }
 
-        button {
-            background: #4CAF50;
-            color: #fff;
-            padding: 10px;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            font-size: 16px;
-        }
+    input[type="number"] {
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      width: 100%;
+      font-size: 14px;
+      box-sizing: border-box;
+    }
 
-        button:hover {
-            background: #45a049;
-        }
+    button {
+      background: #4CAF50; /* Green background */
+      color: #fff;
+      padding: 10px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 16px;
+    }
 
-        #result {
-            margin-top: 20px;
-            font-size: 16px;
-            color: #333;
-        }
-    </style>
+    button:hover {
+      background: #45a049; /* Darker green on hover */
+    }
+
+    /* Result Styles */
+    #result {
+      margin-top: 20px;
+      font-size: 16px;
+      color: #333;
+    }
+
+    /* Responsive Styles */
+    @media (max-width: 600px) {
+      .container {
+        width: 100%;
+        padding: 10px;
+      }
+
+      header {
+        padding: 10px 0;
+      }
+
+      header h2 {
+        font-size: 20px;
+      }
+
+      form {
+        gap: 5px;
+      }
+
+      label {
+        font-size: 12px;
+      }
+
+      input[type="number"] {
+        font-size: 12px;
+        padding: 8px;
+      }
+
+      button {
+        font-size: 14px;
+        padding: 8px;
+      }
+
+      #result {
+        font-size: 14px;
+      }
+    }
+  </style>
 </head>
 <body>
-    <div class="container">
-        <h1>Ingrese sus datos para predecir su nivel de vulnerabilidad</h1>
-        <form id="prediction-form">
-            <label>Género (0-Hombre, 1-Mujer): <input type="number" name="a" required></label>
-            <label>Estado civil (1.Soltero(a), 2.Casado(a), 3.Unión libre, 4.Divorciado(a), 5.Viudo(a)): <input type="number" name="b" required></label>
-            <label>Nivel de estudios (1.Primaria, 2.Secundaria, 3.Bachillerato, 4.Prepa, 5.Licenciatura, 6.Maestría, 7.Doctorado): <input type="number" name="c" required></label>
-            <label>Correos sospechosos (0-No, 1-Sí): <input type="number" name="d" required></label>
-            <label>Intentos de persuasión (0-No, 1-Sí): <input type="number" name="e" required></label>
-            <label>Invitación a hacer clic en enlaces desconocidos (0-No, 1-Sí): <input type="number" name="f" required></label>
-            <label>Suplantación de identidad en línea (0-No, 1-Sí): <input type="number" name="g" required></label>
-            <label>Proporcionar información en sitios web no legítimos (0-No, 1-Sí): <input type="number" name="h" required></label>
-            <label>Estafas en línea a compañeros o amigos (0-No, 1-Sí): <input type="number" name="i" required></label>
-            <label>Revisar la autenticidad de las fuentes (0-No, 1-Sí): <input type="number" name="j" required></label>
-            <label>Mensajes de premios o sorteos desconocidos (0-No, 1-Sí): <input type="number" name="k" required></label>
-            <label>Correos sospechosos solicitando información personal (0-No, 1-Sí): <input type="number" name="l" required></label>
-            <label>Fraudes en línea a amigos o familiares (0-No, 1-Sí): <input type="number" name="m" required></label>
-            <label>Solicitudes de información por desconocidos (0-No, 1-Sí): <input type="number" name="n" required></label>
-            <label>Descargar archivos adjuntos no confiables (0-No, 1-Sí): <input type="number" name="o" required></label>
-            <label>Compartir información personal en foros en línea (0-No, 1-Sí): <input type="number" name="p" required></label>
-            <label>Acoso o ciberbullying en línea (0-No, 1-Sí): <input type="number" name="q" required></label>
-            <label>Intentos de acceso no autorizado (0-No, 1-Sí): <input type="number" name="r" required></label>
-            <label>Participación en talleres de seguridad en línea (0-No, 1-Sí): <input type="number" name="s" required></label>
-            <label>Mensajes de suplantadores en redes sociales (0-No, 1-Sí): <input type="number" name="t" required></label>
-            <label>Proporcionar información a llamadas o mensajes no solicitados (0-No, 1-Sí): <input type="number" name="u" required></label>
-            <label>Llamadas solicitando información confidencial (0-No, 1-Sí): <input type="number" name="v" required></label>
-            <label>Uso de redes Wi-Fi públicas para información personal (0-No, 1-Sí): <input type="number" name="w" required></label>
-            <label>Compartir información confidencial imprudentemente (0-No, 1-Sí): <input type="number" name="x" required></label>
-            <label>Descargar aplicaciones de fuentes no oficiales (0-No, 1-Sí): <input type="number" name="y" required></label>
-            <label>Intentos de extorsión en línea (0-No, 1-Sí): <input type="number" name="z" required></label>
-            <label>Redirección a sitios web de phishing (0-No, 1-Sí): <input type="number" name="aa" required></label>
-            <label>Intentos de extorsión con información personal (0-No, 1-Sí): <input type="number" name="ab" required></label>
-            <button type="submit">Predecir</button>
-        </form>
-        <div id="result"></div>
-    </div>
+  <div class="container">
+    <header>
+      <h2>INGENIERÍA SOCIAL</h2>
+    </header>
+    <form id="prediction-form">
+      <p>Ingrese sus datos para predecir su nivel de vulnerabilidad:</p>
+      <label>Género (0-Hombre, 1-Mujer): <input type="number" name="a" required></label>
+      <label>Estado civil (1.Soltero(a), 2.Casado(a), 3.Unión libre, 4.Divorciado(a), 5.Viudo(a)): <input type="number" name="b" required></label>
+      <label>Nivel de estudios (1.Primaria, 2.Secundaria, 3.Bachillerato, 4.Prepa, 5.Licenciatura, 6.Maestría, 7.Doctorado): <input type="number" name="c" required></label>
+      <label>Correos sospechosos (0-No, 1-Sí): <input type="number" name="d" required></label>
+      <label>Intentos de persuasión (0-No, 1-Sí): <input type="number" name="e" required></label>
+      <label>Invitación a hacer clic en enlaces desconocidos (0-No, 1-Sí): <input type="number" name="f" required></label>
+      <label>Suplantación de identidad en línea (0-No, 1-Sí): <input type="number" name="g" required></label>
+      <label>Proporcionar información en sitios web no legítimos (0-No, 1-Sí): <input type="number" name="h" required></label>
+      <label>Estafas en línea a compañeros o amigos (0-No, 1-Sí): <input type="number" name="i" required></label>
+      <label>Revisar la autenticidad de las fuentes (0-No, 1-Sí): <input type="number" name="j" required></label>
+      <label>Mensajes de premios o sorteos desconocidos (0-No, 1-Sí): <input type="number" name="k" required></label>
+      <label>Correos sospechosos solicitando información personal (0-No, 1-Sí): <input type="number" name="l" required></label>
+      <label>Fraudes en línea a amigos o familiares (0-No, 1-Sí): <input type="number" name="m" required></label>
+      <label>Solicitudes de información por desconocidos (0-No, 1-Sí): <input type="number" name="n" required></label>
+      <label>Descargar archivos adjuntos no confiables (0-No, 1-Sí): <input type="number" name="o" required></label>
+      <label>Compartir información personal en foros en línea (0-No, 1-Sí): <input type="number" name="p" required></label>
+      <label>Acoso o ciberbullying en línea (0-No, 1-Sí): <input type="number" name="q" required></label>
+      <label>Intentos de acceso no autorizado (0-No, 1-Sí): <input type="number" name="r" required></label>
+      <label>Participación en talleres de seguridad en línea (0-No, 1-Sí): <input type="number" name="s" required></label>
+      <label>Mensajes de suplantadores en redes sociales (0-No, 1-Sí): <input type="number" name="t" required></label>
+      <label>Proporcionar información a llamadas o mensajes no solicitados (0-No, 1-Sí): <input type="number" name="u" required></label>
+      <label>Llamadas solicitando información confidencial (0-No, 1-Sí): <input type="number" name="v" required></label>
+      <label>Uso de redes Wi-Fi públicas para información personal (0-No, 1-Sí): <input type="number" name="w" required></label>
+      <label>Compartir información confidencial imprudentemente (0-No, 1-Sí): <input type="number" name="x" required></label>
+      <label>Descargar aplicaciones de fuentes no oficiales (0-No, 1-Sí): <input type="number" name="y" required></label>
+      <label>Intentos de extorsión en línea (0-No, 1-Sí): <input type="number" name="z" required></label>
+      <label>Redirección a sitios web de phishing (0-No, 1-Sí): <input type="number" name="aa" required></label>
+      <label>Intentos de extorsión con información personal (0-No, 1-Sí): <input type="number" name="ab" required></label>
+      <button type="submit">Predecir</button>
+    </form>
+    <div id="result"></div>
+  </div>
 
-    <script>
-        document.getElementById('prediction-form').addEventListener('submit', function(event) {
-            event.preventDefault();
-            const formData = new FormData(event.target);
-            fetch('/predict', {
-                method: 'POST',
-                body: formData
-            })
-            .then(response => response.json())
-            .then(data => {
-                if (data.error) {
-                    document.getElementById('result').textContent = `Error: ${data.error}`;
-                } else {
-                    document.getElementById('result').textContent = `Tu nivel de vulnerabilidad ante técnicas de Ingeniería Social es: ${data.prediction}`;
-                }
-            })
-            .catch(error => {
-                document.getElementById('result').textContent = `Error: ${error.message}`;
-            });
-        });
-    </script>
+  <script>
+    document.getElementById('prediction-form').addEventListener('submit', function(event) {
+      event.preventDefault();
+      const formData = new FormData(event.target);
+      fetch('/predict', {
+        method: 'POST',
+        body: formData
+      })
+      .then(response => response.json())
+      .then(data => {
+        if (data.error) {
+          document.getElementById('result').textContent = `Error: ${data.error}`;
+        } else {
+          document.getElementById('result').textContent = `Tu nivel de vulnerabilidad ante técnicas de Ingeniería Social es: ${data.prediction}`;
+        }
+      })
+      .catch(error => {
+        document.getElementById('result').textContent = `Error: ${error.message}`;
+      });
+    });
+  </script>
 </body>
 </html>
